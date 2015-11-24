@@ -1,4 +1,4 @@
-package plugins.load;
+package load;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

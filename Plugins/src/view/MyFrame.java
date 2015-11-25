@@ -1,7 +1,4 @@
 package view;
-
-import java.util.Observer;
-
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 
@@ -42,9 +39,9 @@ public class MyFrame extends JFrame{
 	public static void main(String [] args){
 		
 		PluginFinder pluginFinder = new PluginFinder("plugins");
-		JMenuBar menu = new JMenuBar();
+		Menu menu = new Menu();
 		
-		//pluginFinder.addObserver( menu);
+		pluginFinder.addObserver(menu);
 		new MyFrame(menu);
 	}
 

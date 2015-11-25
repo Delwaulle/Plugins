@@ -8,7 +8,7 @@ public interface Plugin {
 	
 	/**
 	 * @param s
-	 * @return
+	 * @return the plugin transformation
 	 */
 	public String transform(String s);
 	

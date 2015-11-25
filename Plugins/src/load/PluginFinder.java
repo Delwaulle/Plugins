@@ -51,6 +51,6 @@ public class PluginFinder extends Observable implements ActionListener{
 	}
 
 	private void notify(List<File> list) {
-		this.notifyObservers(list);	
+		this.notifyObservers(filter.getPluginsFiles(list));	
 	}
 }

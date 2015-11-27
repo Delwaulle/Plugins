@@ -1,16 +1,16 @@
 package view;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 
 import plugins.Plugin;
 
-public class Menu extends JMenuBar implements PluginObserver{
+public class Menu extends JMenuBar implements PluginObserver,ActionListener{
 
 	/**
 	 * 
@@ -37,18 +37,24 @@ public class Menu extends JMenuBar implements PluginObserver{
 		this.add(toolsMenu);
 		this.add(helpMenu);
 	}
+	
+	public void updateJMenuItems(){
+		JMenuItem item;
+		for(Plugin plugin : this.pluginsList){
+			item=new JMenuItem(plugin.getLabel());
+			item.addActionListener(this);
+			this.add(item);
+		}
+		this.repaint();
+	}
 
 	@Override
-	public void update(List<Plugin> list) {
+	public void changePlugin(List<Plugin> list) {
 		this.pluginsList=list;
-		
+		this.updateJMenuItems();
 	}
 
 	@Override
-	public void update(Observable o, Object arg) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) {	
 	}
-
-
 }

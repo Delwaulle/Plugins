@@ -1,9 +1,6 @@
 package view;
 
 import java.util.List;
-import java.util.Observer;
-
-
 import plugins.Plugin;
 
 /**
@@ -11,12 +8,12 @@ import plugins.Plugin;
  * @author guilbertf
  *
  */
-public interface PluginObserver extends Observer{
+public interface PluginObserver{
 
 	/**
 	 * Method called by the method notifyObservers from the model
 	 * @param obs
 	 * @param list
 	 */
-	public void update( List<Plugin> list);
+	public void changePlugin(List<Plugin> pluginsList);
 }

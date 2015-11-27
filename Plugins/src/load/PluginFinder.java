@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Observable;
+
 
 /**
  * @author guilbertf
@@ -14,12 +14,12 @@ import java.util.Observable;
  * Research into the directory (in param) all the plugins which validated by the PluginFilter
  *
  */
-public class PluginFinder extends Observable implements ActionListener{
+public class PluginFinder extends PluginObservable implements ActionListener{
 
 	protected ExtendedTimer finderListener;
 	protected String directory;
 	protected PluginFilter filter;
-	List<File> plugins;
+	protected List<File> pluginsFilesList;
 	
 	
 	/**
@@ -27,7 +27,7 @@ public class PluginFinder extends Observable implements ActionListener{
 	 */
 	public PluginFinder(String directory){
 		this.directory=directory;
-		this.plugins=new ArrayList<File>();
+		this.pluginsFilesList=new ArrayList<File>();
 		this.finderListener= new ExtendedTimer(this);
 		filter = new PluginFilter();
 	}
@@ -46,11 +46,10 @@ public class PluginFinder extends Observable implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		List<File> list=this.getAllFiles();
-		if(!(this.plugins.equals(list))) //soon compare to
-			this.notify(list);			
+		if(!(this.pluginsFilesList.equals(list))){
+			this.pluginsFilesList=this.getAllFiles();
+			this.notifyObservers(filter.getPluginsFiles(list));	
+		}		
 	}
 
-	private void notify(List<File> list) {
-		this.notifyObservers(filter.getPluginsFiles(list));	
-	}
 }

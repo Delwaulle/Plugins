@@ -29,6 +29,7 @@ public class PluginFinder extends PluginObservable implements ActionListener{
 		this.directory=directory;
 		this.pluginsFilesList=new ArrayList<File>();
 		this.finderListener= new ExtendedTimer(this);
+		finderListener.start();
 		filter = new PluginFilter();
 	}
 

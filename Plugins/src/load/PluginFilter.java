@@ -43,7 +43,7 @@ public class PluginFilter implements FilenameFilter {
 	 * @return the .class of the plugin
 	 */
 	public Class<?> getPluginsClass(String currentFile) {
-		try {
+		try {		
 			return Class.forName("plugins."+currentFile.replaceFirst(PARSER, ""));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

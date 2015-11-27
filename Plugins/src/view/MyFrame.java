@@ -1,5 +1,8 @@
 package view;
+import java.io.File;
+
 import javax.swing.JFrame;
+
 import load.PluginFinder;
 
 /**
@@ -24,7 +27,7 @@ public class MyFrame extends JFrame{
 		TextArea textArea=new TextArea();
 		
 		//pluginfinder
-		PluginFinder pluginFinder = new PluginFinder("plugins");
+		PluginFinder pluginFinder = new PluginFinder("plugins"+File.separator);
 		
 		//menu
 		Menu menu = new Menu(textArea);	

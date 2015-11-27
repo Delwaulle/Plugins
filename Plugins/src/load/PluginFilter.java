@@ -29,37 +29,36 @@ public class PluginFilter implements FilenameFilter {
 	}
 
 	/**
-	 * specific function to verify the try catch
-	 * 
 	 * @param name
 	 * @return true if there is no error with the Class.forName
 	 */
-	public boolean acceptClass(String name){
-		try {
-			Class.forName(name.replaceFirst(PARSER, ""));
-			return true;
-		} catch (ClassNotFoundException e) {
-			return false;
-		}
+	public boolean acceptClass(String name) {
+		return getPluginsClass(name) == null;
 	}
-	
-	
+
 	/**
 	 * specific function to verify the try catch
 	 * 
 	 * @param currentFile
 	 * @return the .class of the plugin
 	 */
-	public Class<?> getPluginsClass(File currentFile) {
+	public Class<?> getPluginsClass(String currentFile) {
 		try {
-			return Class.forName("plugins."
-					+ currentFile.getName().replaceFirst(PARSER, ""));
+			return Class.forName(currentFile.replaceFirst(PARSER, ""));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		;
 		return null;
+	}
+
+	/**
+	 * @param theClass
+	 * @return true if the plugin is in the package 'plugins'
+	 */
+	public boolean testPackage(Class<?> theClass) {
+		return theClass.getPackage().getName().equals("plugins");
 	}
 
 	/**
@@ -77,15 +76,16 @@ public class PluginFilter implements FilenameFilter {
 		}
 		return null;
 	}
-	
+
 	/**
-	 * specific function to verify the try catch
-	 * in the purpose of add a plugin to our list of plugins
+	 * specific function to verify the try catch in the purpose of add a plugin
+	 * to our list of plugins
 	 * 
 	 * @param pluginsList
 	 * @param emptyConstructor
 	 */
-	public void addPluginToList(List<Plugin> pluginsList,Constructor<?> emptyConstructor){
+	public void addPluginToList(List<Plugin> pluginsList,
+			Constructor<?> emptyConstructor) {
 		try {
 			pluginsList.add((Plugin) emptyConstructor.newInstance());
 		} catch (InstantiationException | IllegalAccessException
@@ -103,10 +103,12 @@ public class PluginFilter implements FilenameFilter {
 	public List<Plugin> getPluginsFiles(List<File> list) {
 		List<Plugin> pluginsList = new ArrayList<Plugin>();
 		for (File currentFile : list) {
-			Class<?> theClass = getPluginsClass(currentFile);
-			if (theClass.isAssignableFrom(Plugin.class)) {
-				Constructor<?> emptyConstructor = getPluginConstructor(theClass);
-				addPluginToList(pluginsList, emptyConstructor);
+			Class<?> theClass = getPluginsClass(currentFile.getName());
+			if(testPackage(theClass)){
+				if (theClass.isAssignableFrom(Plugin.class)) {
+					Constructor<?> emptyConstructor = getPluginConstructor(theClass);
+					addPluginToList(pluginsList, emptyConstructor);
+				}
 			}
 		}
 

@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JMenu;
@@ -10,7 +8,7 @@ import javax.swing.JMenuItem;
 
 import plugins.Plugin;
 
-public class Menu extends JMenuBar implements PluginObserver,ActionListener{
+public class Menu extends JMenuBar implements PluginObserver{
 
 	/**
 	 * 
@@ -24,9 +22,12 @@ public class Menu extends JMenuBar implements PluginObserver,ActionListener{
 	private JMenu toolsMenu;
 	private JMenu helpMenu;
 	
-	//MenusItems
+	//view
+	private PluginView view;
 	
-	public Menu(){
+	
+	public Menu(PluginView view){
+		this.view=view;
 		pluginsList=new ArrayList<Plugin>();
 		this.fileMenu=new JMenu("File");
 		this.toolsMenu=new JMenu("Tools");
@@ -36,13 +37,23 @@ public class Menu extends JMenuBar implements PluginObserver,ActionListener{
 		this.add(fileMenu);
 		this.add(toolsMenu);
 		this.add(helpMenu);
+		
+		//add a default menuItem
+		JMenuItem defaultItem = new JMenuItem("default");
+		toolsMenu.add(defaultItem);
+		defaultItem.addActionListener(new ItemListener(null,view));
+		
+		
+		
+		//set actions and add plugins to tools menu
+		updateJMenuItems();
 	}
 	
 	public void updateJMenuItems(){
 		JMenuItem item;
 		for(Plugin plugin : this.pluginsList){
 			item=new JMenuItem(plugin.getLabel());
-			item.addActionListener(this);
+			item.addActionListener(new ItemListener(plugin,view));
 			this.add(item);
 		}
 		this.repaint();
@@ -52,9 +63,5 @@ public class Menu extends JMenuBar implements PluginObserver,ActionListener{
 	public void changePlugin(List<Plugin> list) {
 		this.pluginsList=list;
 		this.updateJMenuItems();
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {	
 	}
 }

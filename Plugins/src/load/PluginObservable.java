@@ -1,5 +1,6 @@
 package load;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import plugins.Plugin;
@@ -7,7 +8,7 @@ import view.PluginObserver;
 
 public abstract class PluginObservable {
 
-	private List<PluginObserver> observersList;
+	private List<PluginObserver> observersList=new ArrayList<PluginObserver>();
 	
 	public void addObserver(PluginObserver observer){
 		this.observersList.add(observer);

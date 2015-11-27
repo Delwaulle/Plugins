@@ -1,7 +1,5 @@
 package view;
 import javax.swing.JFrame;
-import javax.swing.JMenuBar;
-
 import load.PluginFinder;
 
 /**
@@ -19,17 +17,32 @@ public class MyFrame extends JFrame{
 	/**
 	 * Initialize components of the JFrame
 	 */
-	public MyFrame(JMenuBar menu){
+	public MyFrame(){
 		super("Extendable Editor");
+		
+		//textArea
+		TextArea textArea=new TextArea();
+		
+		//pluginfinder
+		PluginFinder pluginFinder = new PluginFinder("plugins");
+		
+		//menu
+		Menu menu = new Menu(textArea);	
+		
+		//fix the observer
+		pluginFinder.addObserver(menu);
 		
 		//add the menu bar to the JFrame
 		this.setJMenuBar(menu);
+		
+		//add the view to the content pane
+		this.getContentPane().add(textArea);
 		
 		//set size and options
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(400,300);
 		this.setVisible(true);
-		//this.setExtendedState(JFrame.MAXIMIZED_BOTH);	
+		
 	}
 	
 	/**
@@ -37,12 +50,7 @@ public class MyFrame extends JFrame{
 	 * @param args
 	 */
 	public static void main(String [] args){
-		
-		PluginFinder pluginFinder = new PluginFinder("plugins");
-		Menu menu = new Menu();
-		
-		pluginFinder.addObserver(menu);
-		new MyFrame(menu);
+		new MyFrame();
 	}
 
 }

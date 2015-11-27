@@ -11,7 +11,7 @@ import plugins.Plugin;
 public interface PluginObserver{
 
 	/**
-	 * Method called by the method notifyObservers from the model
+	 * Method called by the method notifyObservers from the plugin finder
 	 * @param obs
 	 * @param list
 	 */

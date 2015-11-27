@@ -38,23 +38,24 @@ public class Menu extends JMenuBar implements PluginObserver{
 		this.add(toolsMenu);
 		this.add(helpMenu);
 		
-		//add a default menuItem
-		JMenuItem defaultItem = new JMenuItem("default");
-		toolsMenu.add(defaultItem);
-		defaultItem.addActionListener(new ItemListener(null,view));
-		
-		
-		
 		//set actions and add plugins to tools menu
 		updateJMenuItems();
 	}
 	
 	public void updateJMenuItems(){
+		toolsMenu.removeAll();
 		JMenuItem item;
-		for(Plugin plugin : this.pluginsList){
-			item=new JMenuItem(plugin.getLabel());
-			item.addActionListener(new ItemListener(plugin,view));
+		if(this.pluginsList.isEmpty()){
+			item=new JMenuItem("No available plugin(s)");
+			item.setEnabled(false);
 			this.toolsMenu.add(item);
+		}
+		else{
+			for(Plugin plugin : this.pluginsList){
+				item=new JMenuItem(plugin.getLabel());
+				item.addActionListener(new ItemListener(plugin,view));
+				this.toolsMenu.add(item);
+			}
 		}
 		this.repaint();
 		this.revalidate();

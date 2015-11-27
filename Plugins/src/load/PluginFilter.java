@@ -33,7 +33,7 @@ public class PluginFilter implements FilenameFilter {
 	 * @return true if there is no error with the Class.forName
 	 */
 	public boolean acceptClass(String name) {
-		return getPluginsClass(name) == null;
+		return getPluginsClass(name) != null;
 	}
 
 	/**
@@ -43,7 +43,8 @@ public class PluginFilter implements FilenameFilter {
 	 * @return the .class of the plugin
 	 */
 	public Class<?> getPluginsClass(String currentFile) {
-		try {		
+		try {
+			
 			return Class.forName("plugins."+currentFile.replaceFirst(PARSER, ""));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -96,12 +97,11 @@ public class PluginFilter implements FilenameFilter {
 		List<Plugin> pluginsList = new ArrayList<Plugin>();
 		for (File currentFile : list) {
 			Class<?> theClass = getPluginsClass(currentFile.getName());
-			if (theClass.isAssignableFrom(Plugin.class)) {
+			if (Plugin.class.isAssignableFrom(theClass)) {
 				Constructor<?> emptyConstructor = getPluginConstructor(theClass);
 				addPluginToList(pluginsList, emptyConstructor);
 			}
 		}
-
 		return pluginsList;
 	}
 

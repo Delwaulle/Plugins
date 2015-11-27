@@ -54,9 +54,10 @@ public class Menu extends JMenuBar implements PluginObserver{
 		for(Plugin plugin : this.pluginsList){
 			item=new JMenuItem(plugin.getLabel());
 			item.addActionListener(new ItemListener(plugin,view));
-			this.add(item);
+			this.toolsMenu.add(item);
 		}
 		this.repaint();
+		this.revalidate();
 	}
 
 	@Override

@@ -17,7 +17,6 @@ public class ItemListener implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("plugin ");
 		view.updateView(this.plugin);
 	}
 

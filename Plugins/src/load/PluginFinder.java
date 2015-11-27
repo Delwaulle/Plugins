@@ -48,8 +48,8 @@ public class PluginFinder extends PluginObservable implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		List<File> list=this.getAllFiles();
 		if(!(this.pluginsFilesList.equals(list))){
-			this.pluginsFilesList=this.getAllFiles();
 			this.notifyObservers(filter.getPluginsFiles(list));	
+			this.pluginsFilesList=list;
 		}		
 	}
 

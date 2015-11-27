@@ -44,21 +44,13 @@ public class PluginFilter implements FilenameFilter {
 	 */
 	public Class<?> getPluginsClass(String currentFile) {
 		try {
-			return Class.forName(currentFile.replaceFirst(PARSER, ""));
+			return Class.forName("plugins."+currentFile.replaceFirst(PARSER, ""));
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		;
 		return null;
-	}
-
-	/**
-	 * @param theClass
-	 * @return true if the plugin is in the package 'plugins'
-	 */
-	public boolean testPackage(Class<?> theClass) {
-		return theClass.getPackage().getName().equals("plugins");
 	}
 
 	/**
@@ -104,11 +96,9 @@ public class PluginFilter implements FilenameFilter {
 		List<Plugin> pluginsList = new ArrayList<Plugin>();
 		for (File currentFile : list) {
 			Class<?> theClass = getPluginsClass(currentFile.getName());
-			if(testPackage(theClass)){
-				if (theClass.isAssignableFrom(Plugin.class)) {
-					Constructor<?> emptyConstructor = getPluginConstructor(theClass);
-					addPluginToList(pluginsList, emptyConstructor);
-				}
+			if (theClass.isAssignableFrom(Plugin.class)) {
+				Constructor<?> emptyConstructor = getPluginConstructor(theClass);
+				addPluginToList(pluginsList, emptyConstructor);
 			}
 		}
 

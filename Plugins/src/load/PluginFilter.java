@@ -98,7 +98,7 @@ public class PluginFilter implements FilenameFilter {
 	 * verify and add the .class of their plugins
 	 * 
 	 * @param list
-	 * @return le list of plugins
+	 * @return the list of plugins
 	 */
 	public List<Plugin> getPluginsFiles(List<File> list) {
 		List<Plugin> pluginsList = new ArrayList<Plugin>();

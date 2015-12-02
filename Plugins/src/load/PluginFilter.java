@@ -63,7 +63,7 @@ public class PluginFilter implements FilenameFilter {
 	public Constructor<?> getPluginConstructor(Class<?> theClass) {
 		try {
 			return theClass.getConstructor();
-		} catch (NoSuchMethodException | SecurityException e) {
+		} catch (NoSuchMethodException | SecurityException | NullPointerException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

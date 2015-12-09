@@ -17,6 +17,8 @@ public class MyFrame extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	public static final String PATH ="dropins" +File.separator+"plugins"+File.separator;
+	
 	/**
 	 * Initialize components of the JFrame
 	 */
@@ -27,8 +29,7 @@ public class MyFrame extends JFrame{
 		TextArea textArea=new TextArea();
 		
 		//pluginfinder
-		PluginFinder pluginFinder = new PluginFinder("plugins"+File.separator);
-		
+		PluginFinder pluginFinder = new PluginFinder(PATH);
 		//menu
 		Menu menu = new Menu(textArea);	
 		

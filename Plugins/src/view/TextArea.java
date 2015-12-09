@@ -7,6 +7,11 @@ import javax.swing.JTextArea;
 
 import plugins.Plugin;
 
+/**
+ * Our text area
+ * @author delwaulle
+ *
+ */
 public class TextArea extends JTextArea implements PluginView,KeyListener{
 
 	/**

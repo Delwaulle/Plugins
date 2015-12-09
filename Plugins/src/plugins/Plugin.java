@@ -1,6 +1,7 @@
 package plugins;
 
 /**
+ * Plugin for the application
  * @author Loic
  *
  */

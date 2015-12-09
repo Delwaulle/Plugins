@@ -8,6 +8,11 @@ import javax.swing.JMenuItem;
 
 import plugins.Plugin;
 
+/**
+ * Menu which observes the plugin finder and update the jmenu 
+ * @author delwaulle
+ *
+ */
 public class Menu extends JMenuBar implements PluginObserver{
 
 	/**
@@ -26,6 +31,9 @@ public class Menu extends JMenuBar implements PluginObserver{
 	private PluginView view;
 	
 	
+	/**
+	 * @param view
+	 */
 	public Menu(PluginView view){
 		this.view=view;
 		pluginsList=new ArrayList<Plugin>();
@@ -42,6 +50,9 @@ public class Menu extends JMenuBar implements PluginObserver{
 		updateJMenuItems();
 	}
 	
+	/**
+	 * repaint the menu with the updated list of plugins
+	 */
 	public void updateJMenuItems(){
 		toolsMenu.removeAll();
 		JMenuItem item;

@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import plugins.Plugin;
+
 
 /**
  * @author guilbertf
@@ -20,6 +22,7 @@ public class PluginFinder extends PluginObservable implements ActionListener{
 	protected String directory;
 	protected PluginFilter filter;
 	protected List<File> pluginsFilesList;
+	protected List<Plugin> pluginList;
 	
 	
 	/**
@@ -28,6 +31,7 @@ public class PluginFinder extends PluginObservable implements ActionListener{
 	public PluginFinder(String directory){
 		this.directory=directory;
 		this.pluginsFilesList=new ArrayList<File>();
+		this.pluginList = new ArrayList<Plugin>();
 		this.finderListener= new ExtendedTimer(this);
 		finderListener.start();
 		filter = new PluginFilter();
@@ -48,9 +52,18 @@ public class PluginFinder extends PluginObservable implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		List<File> list=this.getAllFiles();
 		if(!(this.pluginsFilesList.equals(list))){
-			this.notifyObservers(filter.getPluginsFiles(list));	
+			this.pluginList = filter.getPluginsFiles(list);
+			this.notifyObservers(pluginList);
 			this.pluginsFilesList=list;
 		}		
+	}
+
+	public List<Plugin> getPluginList() {
+		return pluginList;
+	}
+
+	public void setPulginList(List<Plugin> pulginList) {
+		this.pluginList = pulginList;
 	}
 
 }

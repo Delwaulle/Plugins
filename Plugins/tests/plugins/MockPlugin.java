@@ -9,7 +9,7 @@ public class MockPlugin implements Plugin{
 	@Override
 	public String transform(String s) {
 		// TODO Auto-generated method stub
-		return null;
+		return "";
 	}
 
 	@Override

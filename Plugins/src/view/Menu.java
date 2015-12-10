@@ -77,4 +77,8 @@ public class Menu extends JMenuBar implements PluginObserver{
 		this.pluginsList=list;
 		this.updateJMenuItems();
 	}
+	
+	public List<Plugin> getPluginList(){
+		return pluginsList;
+	}
 }

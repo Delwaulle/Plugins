@@ -47,5 +47,9 @@ public class ExtendedTimer implements ActionListener {
 		timer.stop();
 		timer=null;
 	}
+	
+	public Timer getTimer(){
+		return this.timer;
+	}
 
 }

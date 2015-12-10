@@ -3,11 +3,14 @@ package load;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import plugins.MockPlugin;
+import plugins.Plugin;
 
 public class PluginFilterTest {
 	PluginFilter filter;
@@ -50,5 +53,14 @@ public class PluginFilterTest {
 		assertNull(filter.getPluginConstructor(theClass));
 	}
 	
+	@Test
+	public void getPluginsTest(){
+		String path = "tests"+File.separator+"dropins"+File.separator+"plugins"+File.separator;
+		PluginFinder finder = new PluginFinder(path);
+		List<Plugin> list = filter.getPluginsFiles(finder.getAllFiles());
+		List<Plugin> list2 = new ArrayList<Plugin>();
+		list2.add(new MockPlugin());
+		assertEquals(list2.get(0).getClass(), list.get(0).getClass()); //getClass = MockPlugin
+	}
 	
 }

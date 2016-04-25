@@ -1,0 +1,15 @@
+site_name: My Docs
+repo_url: https://gitlab;com/mon_projet
+site_description: A test documentation
+site_favicon: favicon.ico
+copyright: 2016-loic
+pages:
+  - Home: index.md
+theme: readthedocs
+docs_dir: docs 
+site_dir: site
+
+
+
+
+

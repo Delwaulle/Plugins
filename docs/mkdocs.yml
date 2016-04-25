@@ -6,7 +6,7 @@ copyright: 2016-loic
 pages:
   - Home: index.md
 theme: readthedocs
-docs_dir: docs 
+docs_dir: source
 site_dir: site
 
 
